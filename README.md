@@ -6,7 +6,7 @@ The Duo Log Analyzer pulls sign-in event logs via the DUO API and scans all the 
 - VPN 
 - tor 
 - hosting 
-- Users login outside the US
+- Logins outside the US
 
 # Aditional useful features include:
 
