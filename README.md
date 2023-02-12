@@ -1,17 +1,20 @@
 # Duo Log Analyzer
 The Duo Log Analyzer pulls sign-in event logs via the DUO API and scans all the IP addresses using the ipwhois.io API. The following security concerns are recognized:
 
-- anonymous 
-- proxy 
-- VPN 
-- tor 
-- hosting 
+- Anonymous IPs
+- Proxy Servers
+- VPNs 
+- Tor 
+- Hosted servers such as AWS EC2 
 - Logins outside the US
 
-# Aditional useful features include:
+# Additional useful features include:
 
-- Reporting on users who logon that is unenrolled.
-- Reporting on users that are in bypass mode.
+- Alerts when an unenrolled users signs in.
+- Alerts when a user signs in that is in bypass mode.
+- Ability to filter users via Regex and list.
+- Ability to filter IP addresses.
+
 
 # Notifications
 
