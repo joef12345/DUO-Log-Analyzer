@@ -27,7 +27,7 @@ An AWS account and SNS is required.
 1. [Download](https://github.com/joef12345/Duo-Log-Analyzer/releases/tag/V1.0.0.0 "Download") the released files and extract to a folder of your choice.
 2. From a command prompt, execute `duo log analyzer.exe -setup`
 3. The GUI will open.
-4. Follow the directions [here](https://duo.com/docs/adminapi "here") to create the dup api application. The only permission that is required is  `read log files`. Enter the DUO API keys and hostname in the GUO.
+4. Follow the directions [here](https://duo.com/docs/adminapi "here") to create the dup api application. The only permission that is required is  `read log files`. Enter the DUO API keys and hostname in the GUI.
 5. Sign up for [ipwhois.io](https://ipwhois.io "ipwhois.io"). Make sure you open a business plan or higher, as the basic plan does not include security tags. Enter the API key in the GUI. Click the test button to confirm API connectivity.
 6. Create an AWS ARN Topic and add email addresses to the subscribers. More info [here](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html "here"). Enter the ARN in the GUI. 
 7. Create an IAM identity so the program can send SNS messages. Use the following policy to restrict the keys to only be allowed to publish messages: `{
