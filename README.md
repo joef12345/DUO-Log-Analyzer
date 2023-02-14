@@ -30,8 +30,8 @@ An AWS account and SNS is required.
 5. Sign up for [ipwhois.io](https://ipwhois.io "ipwhois.io"). Make sure you open a business plan or higher, as the basic plan does not include security tags. Enter the API key in the GUI. Click the test button to confirm API connectivity.
 6. Create an AWS ARN Topic and add email addresses to the subscribers. More info [here](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html "here"). Enter the ARN in the GUI. 
 7. Create an IAM identity so the program can send SNS messages. Use the following policy to restrict the keys to only be allowed to publish messages: 
-```
-{
+
+```{
 "Version": "2012-10-17",
   "Id": "__DUO_Alerts",
   "Statement":[{
@@ -42,7 +42,8 @@ An AWS account and SNS is required.
   }]
 }
 ```
-Enter the keys in the GUI and click the test button to confirm connectivity. Follow the directions [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey "here").
+
+8. Enter the keys in the GUI and click the test button to confirm connectivity. Follow the directions [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey "here").
 8. Add any Ip addresses you would like to ignore and add them to the list. Please leave 0.0.0.0 in, as applications that do not have an IP address will report with 0.0.0.0 like RDP. It's a good idea to add your organization's public IP to the ignore list, as it will prevent using IPWHOIS credits on known addresses. 
 9. Add any users to be ignored to the list to prevent unenrolled alerts. I have found that LDAP login accounts sometimes get sent to DUO, causing several unenrolled notifications. 
 10. You can create a regex filter to prevent unenrolled alerts from getting sent. For example, students normally do not have DUO enrolled in a school setting, which will cause several alerts. To prevent this, create a regex filter for example, if all your student accounts are numeric, use the following filter `[0-9]`. When creating a filter use the test button to confirm your regex expression.
