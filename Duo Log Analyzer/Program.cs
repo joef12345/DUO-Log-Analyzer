@@ -89,8 +89,13 @@ namespace Duo_Log_Analyzer
                     List<string> IgnoreUserList = Properties.Settings.Default.IgnoreUsers.Split(char.Parse("|")).ToList();
                     Console.WriteLine("Processing logon event at: {0}", item.isotimestamp);
                     if (IgnoreUserList.Contains(item.user.name)) { continue; }
+
+                    if (IsPrivateIpAddress(item.access_device.ip))
+                    {
+                        Console.WriteLine("Private IP");
+                    }
                     
-                    if (!IgnoreIPList.Contains(item.access_device.ip))
+                    if (!IgnoreIPList.Contains(item.access_device.ip) && !IsPrivateIpAddress(item.access_device.ip))
                     {
                         IPWhoIS IP = new IPWhoIS();
                         Boolean SecurityEvent = false;
@@ -263,7 +268,19 @@ namespace Duo_Log_Analyzer
             return dateTime;
         }
 
+        public static bool IsPrivateIpAddress(string ipAddress)
+        {
+            string privateIpPattern1 = @"^10\.";  // 10.0.0.0 - 10.255.255.255
+            string privateIpPattern2 = @"^172\.(1[6-9]|2[0-9]|3[0-1])\.";  // 172.16.0.0 - 172.31.255.255
+            string privateIpPattern3 = @"^192\.168\.";  // 192.168.0.0 - 192.168.255.255
+            if (ipAddress == "0.0.0.0") { return true; }
 
+            bool isPrivate1 = Regex.IsMatch(ipAddress, privateIpPattern1);
+            bool isPrivate2 = Regex.IsMatch(ipAddress, privateIpPattern2);
+            bool isPrivate3 = Regex.IsMatch(ipAddress, privateIpPattern3);
+
+            return isPrivate1 || isPrivate2 || isPrivate3;
+        }
         public class Flag
         {
             public string img { get; set; }
