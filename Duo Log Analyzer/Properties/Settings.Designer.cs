@@ -73,7 +73,7 @@ namespace Duo_Log_Analyzer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.0.0.0|")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string IgnoreIPList {
             get {
                 return ((string)(this["IgnoreIPList"]));
@@ -170,12 +170,12 @@ namespace Duo_Log_Analyzer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool OutsideUS {
+        public bool OutsideCountryEnabled {
             get {
-                return ((bool)(this["OutsideUS"]));
+                return ((bool)(this["OutsideCountryEnabled"]));
             }
             set {
-                this["OutsideUS"] = value;
+                this["OutsideCountryEnabled"] = value;
             }
         }
         
@@ -212,6 +212,101 @@ namespace Duo_Log_Analyzer.Properties {
             }
             set {
                 this["UnenrolledUserRegExExpression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool iCloudPrivateRelayEnabled {
+            get {
+                return ((bool)(this["iCloudPrivateRelayEnabled"]));
+            }
+            set {
+                this["iCloudPrivateRelayEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool iCloudPrivateRelayIgnore {
+            get {
+                return ((bool)(this["iCloudPrivateRelayIgnore"]));
+            }
+            set {
+                this["iCloudPrivateRelayIgnore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime ICloudPrivateRelayLastUpdate {
+            get {
+                return ((global::System.DateTime)(this["ICloudPrivateRelayLastUpdate"]));
+            }
+            set {
+                this["ICloudPrivateRelayLastUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GeoAlertsEnabled {
+            get {
+                return ((bool)(this["GeoAlertsEnabled"]));
+            }
+            set {
+                this["GeoAlertsEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public decimal GeoAlertsDistance {
+            get {
+                return ((decimal)(this["GeoAlertsDistance"]));
+            }
+            set {
+                this["GeoAlertsDistance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double GeoAlertsLat {
+            get {
+                return ((double)(this["GeoAlertsLat"]));
+            }
+            set {
+                this["GeoAlertsLat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double GeoAlertsLong {
+            get {
+                return ((double)(this["GeoAlertsLong"]));
+            }
+            set {
+                this["GeoAlertsLong"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OutsideCountryCode {
+            get {
+                return ((string)(this["OutsideCountryCode"]));
+            }
+            set {
+                this["OutsideCountryCode"] = value;
             }
         }
     }

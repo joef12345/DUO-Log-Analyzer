@@ -53,7 +53,6 @@ namespace Duo_Log_Analyzer
             this.textBoxAWSSNSARN = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panelRegEx = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -63,13 +62,8 @@ namespace Duo_Log_Analyzer
             this.checkBoxUnenrolledUser = new System.Windows.Forms.CheckBox();
             this.checkBoxUserInBypass = new System.Windows.Forms.CheckBox();
             this.checkBoxRegExFilter = new System.Windows.Forms.CheckBox();
-            this.checkBoxOutsideUS = new System.Windows.Forms.CheckBox();
+            this.checkBoxCountryEnabled = new System.Windows.Forms.CheckBox();
             this.checkBoxSuspiciousLocation = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBoxIgnoreUser = new System.Windows.Forms.TextBox();
-            this.listBoxIgnoreUser = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxIgnoreIP = new System.Windows.Forms.TextBox();
@@ -77,12 +71,56 @@ namespace Duo_Log_Analyzer
             this.listBoxIgnoreIP = new System.Windows.Forms.ListBox();
             this.buttonApply = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panelGeoAlerts = new System.Windows.Forms.Panel();
+            this.checkBoxGeoAlerts = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.numericUpDownDistance = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxLatitude = new System.Windows.Forms.TextBox();
+            this.textBoxLongitude = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.textBoxCountryCode = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.panelOutsideCountry = new System.Windows.Forms.Panel();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.radioButtonPrivateRelayTag = new System.Windows.Forms.RadioButton();
+            this.radioButtonPrivateRelayIgnore = new System.Windows.Forms.RadioButton();
+            this.checkBoxPrivateRelay = new System.Windows.Forms.CheckBox();
+            this.panelPrivateRelay = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerClearStatus = new System.Windows.Forms.Timer(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBoxIgnoreUser = new System.Windows.Forms.TextBox();
+            this.listBoxIgnoreUser = new System.Windows.Forms.ListBox();
+            this.panelIgnoreIPList = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.panelRegEx.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panelGeoAlerts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDistance)).BeginInit();
+            this.panelOutsideCountry.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.panelPrivateRelay.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.panelIgnoreIPList.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -305,12 +343,7 @@ namespace Duo_Log_Analyzer
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.button4);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.textBoxIgnoreUser);
-            this.groupBox4.Controls.Add(this.listBoxIgnoreUser);
+            this.groupBox4.Controls.Add(this.tabControl1);
             this.groupBox4.Controls.Add(this.button2);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.textBoxIgnoreIP);
@@ -318,25 +351,10 @@ namespace Duo_Log_Analyzer
             this.groupBox4.Controls.Add(this.listBoxIgnoreIP);
             this.groupBox4.Location = new System.Drawing.Point(419, 13);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(369, 441);
+            this.groupBox4.Size = new System.Drawing.Size(378, 441);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Alert Settings";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.panelRegEx);
-            this.groupBox5.Controls.Add(this.checkBoxUnenrolledUser);
-            this.groupBox5.Controls.Add(this.checkBoxUserInBypass);
-            this.groupBox5.Controls.Add(this.checkBoxRegExFilter);
-            this.groupBox5.Controls.Add(this.checkBoxOutsideUS);
-            this.groupBox5.Controls.Add(this.checkBoxSuspiciousLocation);
-            this.groupBox5.Location = new System.Drawing.Point(12, 252);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(350, 168);
-            this.groupBox5.TabIndex = 14;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Alert Types";
             // 
             // panelRegEx
             // 
@@ -346,7 +364,7 @@ namespace Duo_Log_Analyzer
             this.panelRegEx.Controls.Add(this.button5);
             this.panelRegEx.Controls.Add(this.textBoxRegEx);
             this.panelRegEx.Enabled = false;
-            this.panelRegEx.Location = new System.Drawing.Point(6, 88);
+            this.panelRegEx.Location = new System.Drawing.Point(1, 115);
             this.panelRegEx.Name = "panelRegEx";
             this.panelRegEx.Size = new System.Drawing.Size(339, 68);
             this.panelRegEx.TabIndex = 19;
@@ -398,18 +416,18 @@ namespace Duo_Log_Analyzer
             // checkBoxUnenrolledUser
             // 
             this.checkBoxUnenrolledUser.AutoSize = true;
-            this.checkBoxUnenrolledUser.Location = new System.Drawing.Point(7, 42);
+            this.checkBoxUnenrolledUser.Location = new System.Drawing.Point(7, 11);
             this.checkBoxUnenrolledUser.Name = "checkBoxUnenrolledUser";
-            this.checkBoxUnenrolledUser.Size = new System.Drawing.Size(102, 17);
+            this.checkBoxUnenrolledUser.Size = new System.Drawing.Size(184, 17);
             this.checkBoxUnenrolledUser.TabIndex = 13;
-            this.checkBoxUnenrolledUser.Text = "User Unenrolled";
+            this.checkBoxUnenrolledUser.Text = "Send Alert for an Unenrolled User";
             this.checkBoxUnenrolledUser.UseVisualStyleBackColor = true;
             this.checkBoxUnenrolledUser.CheckedChanged += new System.EventHandler(this.checkBoxUnenrolledUser_CheckedChanged);
             // 
             // checkBoxUserInBypass
             // 
             this.checkBoxUserInBypass.AutoSize = true;
-            this.checkBoxUserInBypass.Location = new System.Drawing.Point(134, 19);
+            this.checkBoxUserInBypass.Location = new System.Drawing.Point(6, 32);
             this.checkBoxUserInBypass.Name = "checkBoxUserInBypass";
             this.checkBoxUserInBypass.Size = new System.Drawing.Size(127, 17);
             this.checkBoxUserInBypass.TabIndex = 12;
@@ -419,77 +437,34 @@ namespace Duo_Log_Analyzer
             // checkBoxRegExFilter
             // 
             this.checkBoxRegExFilter.AutoSize = true;
-            this.checkBoxRegExFilter.Location = new System.Drawing.Point(20, 65);
+            this.checkBoxRegExFilter.Location = new System.Drawing.Point(9, 92);
             this.checkBoxRegExFilter.Name = "checkBoxRegExFilter";
-            this.checkBoxRegExFilter.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxRegExFilter.Size = new System.Drawing.Size(136, 17);
             this.checkBoxRegExFilter.TabIndex = 15;
-            this.checkBoxRegExFilter.Text = "Unenrolled RegEx Filter";
+            this.checkBoxRegExFilter.Text = "Unenrolled Regex Filter";
             this.checkBoxRegExFilter.UseVisualStyleBackColor = true;
             this.checkBoxRegExFilter.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
-            // checkBoxOutsideUS
+            // checkBoxCountryEnabled
             // 
-            this.checkBoxOutsideUS.AutoSize = true;
-            this.checkBoxOutsideUS.Location = new System.Drawing.Point(267, 19);
-            this.checkBoxOutsideUS.Name = "checkBoxOutsideUS";
-            this.checkBoxOutsideUS.Size = new System.Drawing.Size(80, 17);
-            this.checkBoxOutsideUS.TabIndex = 11;
-            this.checkBoxOutsideUS.Text = "Outside US";
-            this.checkBoxOutsideUS.UseVisualStyleBackColor = true;
+            this.checkBoxCountryEnabled.AutoSize = true;
+            this.checkBoxCountryEnabled.Location = new System.Drawing.Point(6, 55);
+            this.checkBoxCountryEnabled.Name = "checkBoxCountryEnabled";
+            this.checkBoxCountryEnabled.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxCountryEnabled.TabIndex = 11;
+            this.checkBoxCountryEnabled.Text = "Outside Country";
+            this.checkBoxCountryEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxCountryEnabled.CheckedChanged += new System.EventHandler(this.checkBoxOutsideUS_CheckedChanged);
             // 
             // checkBoxSuspiciousLocation
             // 
             this.checkBoxSuspiciousLocation.AutoSize = true;
-            this.checkBoxSuspiciousLocation.Location = new System.Drawing.Point(7, 19);
+            this.checkBoxSuspiciousLocation.Location = new System.Drawing.Point(6, 9);
             this.checkBoxSuspiciousLocation.Name = "checkBoxSuspiciousLocation";
             this.checkBoxSuspiciousLocation.Size = new System.Drawing.Size(121, 17);
             this.checkBoxSuspiciousLocation.TabIndex = 10;
             this.checkBoxSuspiciousLocation.Text = "Suspicious Location";
             this.checkBoxSuspiciousLocation.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 171);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "User Ignore List";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(12, 190);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Remove";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(288, 161);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Add";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // textBoxIgnoreUser
-            // 
-            this.textBoxIgnoreUser.Location = new System.Drawing.Point(90, 164);
-            this.textBoxIgnoreUser.Name = "textBoxIgnoreUser";
-            this.textBoxIgnoreUser.Size = new System.Drawing.Size(183, 20);
-            this.textBoxIgnoreUser.TabIndex = 6;
-            // 
-            // listBoxIgnoreUser
-            // 
-            this.listBoxIgnoreUser.FormattingEnabled = true;
-            this.listBoxIgnoreUser.Location = new System.Drawing.Point(90, 190);
-            this.listBoxIgnoreUser.Name = "listBoxIgnoreUser";
-            this.listBoxIgnoreUser.Size = new System.Drawing.Size(273, 56);
-            this.listBoxIgnoreUser.TabIndex = 5;
             // 
             // button2
             // 
@@ -546,11 +521,364 @@ namespace Duo_Log_Analyzer
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.button5_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(9, 150);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(359, 285);
+            this.tabControl1.TabIndex = 15;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panelIgnoreIPList);
+            this.tabPage1.Controls.Add(this.checkBoxUnenrolledUser);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(351, 259);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Unenrolled Alerts";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panelOutsideCountry);
+            this.tabPage2.Controls.Add(this.checkBoxSuspiciousLocation);
+            this.tabPage2.Controls.Add(this.checkBoxCountryEnabled);
+            this.tabPage2.Controls.Add(this.checkBoxUserInBypass);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(351, 259);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Security Alerts";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.checkBoxGeoAlerts);
+            this.tabPage3.Controls.Add(this.panelGeoAlerts);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(351, 259);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Geo Alerts";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panelGeoAlerts
+            // 
+            this.panelGeoAlerts.Controls.Add(this.label18);
+            this.panelGeoAlerts.Controls.Add(this.linkLabel1);
+            this.panelGeoAlerts.Controls.Add(this.label15);
+            this.panelGeoAlerts.Controls.Add(this.textBoxLongitude);
+            this.panelGeoAlerts.Controls.Add(this.textBoxLatitude);
+            this.panelGeoAlerts.Controls.Add(this.label14);
+            this.panelGeoAlerts.Controls.Add(this.numericUpDownDistance);
+            this.panelGeoAlerts.Controls.Add(this.label13);
+            this.panelGeoAlerts.Controls.Add(this.label12);
+            this.panelGeoAlerts.Enabled = false;
+            this.panelGeoAlerts.Location = new System.Drawing.Point(4, 31);
+            this.panelGeoAlerts.Name = "panelGeoAlerts";
+            this.panelGeoAlerts.Size = new System.Drawing.Size(342, 116);
+            this.panelGeoAlerts.TabIndex = 0;
+            // 
+            // checkBoxGeoAlerts
+            // 
+            this.checkBoxGeoAlerts.AutoSize = true;
+            this.checkBoxGeoAlerts.Location = new System.Drawing.Point(4, 8);
+            this.checkBoxGeoAlerts.Name = "checkBoxGeoAlerts";
+            this.checkBoxGeoAlerts.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxGeoAlerts.TabIndex = 1;
+            this.checkBoxGeoAlerts.Text = "Enable Geo Alerts";
+            this.checkBoxGeoAlerts.UseVisualStyleBackColor = true;
+            this.checkBoxGeoAlerts.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 43);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(71, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "From Latitude";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 5);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(225, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Generate alert if user\'s location is greater than:";
+            // 
+            // numericUpDownDistance
+            // 
+            this.numericUpDownDistance.Location = new System.Drawing.Point(238, 2);
+            this.numericUpDownDistance.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDownDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownDistance.Name = "numericUpDownDistance";
+            this.numericUpDownDistance.Size = new System.Drawing.Size(53, 20);
+            this.numericUpDownDistance.TabIndex = 2;
+            this.numericUpDownDistance.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(297, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(30, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "miles";
+            // 
+            // textBoxLatitude
+            // 
+            this.textBoxLatitude.Location = new System.Drawing.Point(81, 40);
+            this.textBoxLatitude.Name = "textBoxLatitude";
+            this.textBoxLatitude.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLatitude.TabIndex = 4;
+            // 
+            // textBoxLongitude
+            // 
+            this.textBoxLongitude.Location = new System.Drawing.Point(81, 76);
+            this.textBoxLongitude.Name = "textBoxLongitude";
+            this.textBoxLongitude.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLongitude.TabIndex = 5;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 81);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(54, 13);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Longitude";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(184, 81);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(146, 13);
+            this.linkLabel1.TabIndex = 7;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Use Ipwhois Current Location";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // textBoxCountryCode
+            // 
+            this.textBoxCountryCode.Location = new System.Drawing.Point(9, 2);
+            this.textBoxCountryCode.MaxLength = 2;
+            this.textBoxCountryCode.Name = "textBoxCountryCode";
+            this.textBoxCountryCode.Size = new System.Drawing.Size(31, 20);
+            this.textBoxCountryCode.TabIndex = 13;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(45, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(227, 13);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Two-letter (ISO 3166-1) country code (e.g. US)";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(9, 29);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(132, 13);
+            this.linkLabel2.TabIndex = 15;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Use Ipwhois Country Code";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // panelOutsideCountry
+            // 
+            this.panelOutsideCountry.Controls.Add(this.label16);
+            this.panelOutsideCountry.Controls.Add(this.linkLabel2);
+            this.panelOutsideCountry.Controls.Add(this.textBoxCountryCode);
+            this.panelOutsideCountry.Enabled = false;
+            this.panelOutsideCountry.Location = new System.Drawing.Point(25, 78);
+            this.panelOutsideCountry.Name = "panelOutsideCountry";
+            this.panelOutsideCountry.Size = new System.Drawing.Size(287, 57);
+            this.panelOutsideCountry.TabIndex = 16;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.panelPrivateRelay);
+            this.tabPage4.Controls.Add(this.checkBoxPrivateRelay);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(351, 259);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "iCloud Private Relay";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonPrivateRelayTag
+            // 
+            this.radioButtonPrivateRelayTag.AutoSize = true;
+            this.radioButtonPrivateRelayTag.Location = new System.Drawing.Point(18, 51);
+            this.radioButtonPrivateRelayTag.Name = "radioButtonPrivateRelayTag";
+            this.radioButtonPrivateRelayTag.Size = new System.Drawing.Size(203, 17);
+            this.radioButtonPrivateRelayTag.TabIndex = 1;
+            this.radioButtonPrivateRelayTag.Text = "Tag alert with private relay information";
+            this.radioButtonPrivateRelayTag.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonPrivateRelayIgnore
+            // 
+            this.radioButtonPrivateRelayIgnore.AutoSize = true;
+            this.radioButtonPrivateRelayIgnore.Checked = true;
+            this.radioButtonPrivateRelayIgnore.Location = new System.Drawing.Point(18, 28);
+            this.radioButtonPrivateRelayIgnore.Name = "radioButtonPrivateRelayIgnore";
+            this.radioButtonPrivateRelayIgnore.Size = new System.Drawing.Size(206, 17);
+            this.radioButtonPrivateRelayIgnore.TabIndex = 2;
+            this.radioButtonPrivateRelayIgnore.TabStop = true;
+            this.radioButtonPrivateRelayIgnore.Text = "Do not generate alert (Recommended)";
+            this.radioButtonPrivateRelayIgnore.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPrivateRelay
+            // 
+            this.checkBoxPrivateRelay.AutoSize = true;
+            this.checkBoxPrivateRelay.Location = new System.Drawing.Point(3, 18);
+            this.checkBoxPrivateRelay.Name = "checkBoxPrivateRelay";
+            this.checkBoxPrivateRelay.Size = new System.Drawing.Size(206, 17);
+            this.checkBoxPrivateRelay.TabIndex = 3;
+            this.checkBoxPrivateRelay.Text = "Enable iCloud Private Relay Detection";
+            this.checkBoxPrivateRelay.UseVisualStyleBackColor = true;
+            this.checkBoxPrivateRelay.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // panelPrivateRelay
+            // 
+            this.panelPrivateRelay.Controls.Add(this.label17);
+            this.panelPrivateRelay.Controls.Add(this.radioButtonPrivateRelayIgnore);
+            this.panelPrivateRelay.Controls.Add(this.radioButtonPrivateRelayTag);
+            this.panelPrivateRelay.Enabled = false;
+            this.panelPrivateRelay.Location = new System.Drawing.Point(6, 41);
+            this.panelPrivateRelay.Name = "panelPrivateRelay";
+            this.panelPrivateRelay.Size = new System.Drawing.Size(254, 100);
+            this.panelPrivateRelay.TabIndex = 4;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 490);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(805, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabelStatus
+            // 
+            this.toolStripStatusLabelStatus.Name = "toolStripStatusLabelStatus";
+            this.toolStripStatusLabelStatus.Size = new System.Drawing.Size(0, 17);
+            // 
+            // timerClearStatus
+            // 
+            this.timerClearStatus.Interval = 3000;
+            this.timerClearStatus.Tick += new System.EventHandler(this.timerClearStatus_Tick);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "User Ignore List";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(26, 30);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(69, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "Remove";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(249, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(69, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // textBoxIgnoreUser
+            // 
+            this.textBoxIgnoreUser.Location = new System.Drawing.Point(106, 7);
+            this.textBoxIgnoreUser.Name = "textBoxIgnoreUser";
+            this.textBoxIgnoreUser.Size = new System.Drawing.Size(137, 20);
+            this.textBoxIgnoreUser.TabIndex = 21;
+            // 
+            // listBoxIgnoreUser
+            // 
+            this.listBoxIgnoreUser.FormattingEnabled = true;
+            this.listBoxIgnoreUser.Location = new System.Drawing.Point(108, 30);
+            this.listBoxIgnoreUser.Name = "listBoxIgnoreUser";
+            this.listBoxIgnoreUser.Size = new System.Drawing.Size(212, 56);
+            this.listBoxIgnoreUser.TabIndex = 20;
+            // 
+            // panelIgnoreIPList
+            // 
+            this.panelIgnoreIPList.Controls.Add(this.button4);
+            this.panelIgnoreIPList.Controls.Add(this.panelRegEx);
+            this.panelIgnoreIPList.Controls.Add(this.label9);
+            this.panelIgnoreIPList.Controls.Add(this.listBoxIgnoreUser);
+            this.panelIgnoreIPList.Controls.Add(this.checkBoxRegExFilter);
+            this.panelIgnoreIPList.Controls.Add(this.button3);
+            this.panelIgnoreIPList.Controls.Add(this.textBoxIgnoreUser);
+            this.panelIgnoreIPList.Enabled = false;
+            this.panelIgnoreIPList.Location = new System.Drawing.Point(6, 34);
+            this.panelIgnoreIPList.Name = "panelIgnoreIPList";
+            this.panelIgnoreIPList.Size = new System.Drawing.Size(340, 202);
+            this.panelIgnoreIPList.TabIndex = 25;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(18, 9);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(198, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "If Suspicious IP Is iCloud Private Relay...";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(188, 43);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(131, 13);
+            this.label18.TabIndex = 8;
+            this.label18.Text = "Must Be In WGS84 format";
+            this.label18.Click += new System.EventHandler(this.label18_Click);
+            // 
             // FormSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 492);
+            this.ClientSize = new System.Drawing.Size(805, 512);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -571,11 +899,30 @@ namespace Duo_Log_Analyzer
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.panelRegEx.ResumeLayout(false);
             this.panelRegEx.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.panelGeoAlerts.ResumeLayout(false);
+            this.panelGeoAlerts.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDistance)).EndInit();
+            this.panelOutsideCountry.ResumeLayout(false);
+            this.panelOutsideCountry.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.panelPrivateRelay.ResumeLayout(false);
+            this.panelPrivateRelay.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.panelIgnoreIPList.ResumeLayout(false);
+            this.panelIgnoreIPList.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -599,11 +946,6 @@ namespace Duo_Log_Analyzer
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxAWSAccessCode;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBoxIgnoreUser;
-        private System.Windows.Forms.ListBox listBoxIgnoreUser;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxIgnoreIP;
@@ -611,9 +953,8 @@ namespace Duo_Log_Analyzer
         private System.Windows.Forms.ListBox listBoxIgnoreIP;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.CheckBox checkBoxSuspiciousLocation;
-        private System.Windows.Forms.CheckBox checkBoxOutsideUS;
+        private System.Windows.Forms.CheckBox checkBoxCountryEnabled;
         private System.Windows.Forms.CheckBox checkBoxUserInBypass;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox checkBoxUnenrolledUser;
         private System.Windows.Forms.CheckBox checkBoxRegExFilter;
         private System.Windows.Forms.TextBox textBoxRegEx;
@@ -628,5 +969,39 @@ namespace Duo_Log_Analyzer
         private System.Windows.Forms.CheckBox checkBoxHideAWSSecretKey;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckBox checkBoxGeoAlerts;
+        private System.Windows.Forms.Panel panelGeoAlerts;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxLongitude;
+        private System.Windows.Forms.TextBox textBoxLatitude;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numericUpDownDistance;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxCountryCode;
+        private System.Windows.Forms.Panel panelOutsideCountry;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.RadioButton radioButtonPrivateRelayIgnore;
+        private System.Windows.Forms.RadioButton radioButtonPrivateRelayTag;
+        private System.Windows.Forms.Panel panelPrivateRelay;
+        private System.Windows.Forms.CheckBox checkBoxPrivateRelay;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
+        private System.Windows.Forms.Timer timerClearStatus;
+        private System.Windows.Forms.Panel panelIgnoreIPList;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox listBoxIgnoreUser;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBoxIgnoreUser;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

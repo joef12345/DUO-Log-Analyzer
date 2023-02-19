@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="IgnoreIPList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.0.0.0|</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DUOIKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -38,7 +38,7 @@
     <Setting Name="UserInBypassMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="OutsideUS" Type="System.Boolean" Scope="User">
+    <Setting Name="OutsideCountryEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UnenrolledUser" Type="System.Boolean" Scope="User">
@@ -48,6 +48,30 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UnenrolledUserRegExExpression" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="iCloudPrivateRelayEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="iCloudPrivateRelayIgnore" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ICloudPrivateRelayLastUpdate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GeoAlertsEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GeoAlertsDistance" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="GeoAlertsLat" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="GeoAlertsLong" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OutsideCountryCode" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

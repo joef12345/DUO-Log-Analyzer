@@ -5,11 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Amazon.Runtime;
+using CsvHelper;
+using Duo_Log_Analyzer.Properties;
+using System.Data;
+using CsvHelper.Configuration;
+using System.Globalization;
+using CsvHelper.Configuration.Attributes;
 
 namespace Duo_Log_Analyzer
 {
@@ -17,7 +21,9 @@ namespace Duo_Log_Analyzer
     {
         static void Main(string[] args)
         {
-            if (args.Contains("-setup"))
+
+
+            if (args.Contains("-setup", StringComparer.OrdinalIgnoreCase))
             {
                 var form = new FormSetup();
                 form.Show();
@@ -27,8 +33,8 @@ namespace Duo_Log_Analyzer
 
 
 
-            Console.WriteLine("Duo Log Analyzer {0} https://github.com/joef12345/DUO-Log-Analyzer", Assembly.GetExecutingAssembly().GetName().Version);
-            if (!args.Contains("-run"))
+            Console.WriteLine("Duo Log Analyzer {0} https://github.com/joef12345/DUO-Log-Analyzer 1.0.0.2");
+            if (!args.Contains("-run", StringComparer.OrdinalIgnoreCase))
             {
                 Console.WriteLine("\nUsage: \n-setup Displays the setup GUI.\n-run Scans DUO Logs and sends alerts. (-back7days Request logs from the last 7 days for testing purposes.)\n");
                 return;
@@ -49,19 +55,37 @@ namespace Duo_Log_Analyzer
                 Console.WriteLine("Set TimeStamp offset - Run Again.");
                 return;
             }
+
+            if (Properties.Settings.Default.iCloudPrivateRelayEnabled)
+            {
+                TimeSpan timeDifference = DateTime.Now - Properties.Settings.Default.ICloudPrivateRelayLastUpdate;
+                double totalHours = timeDifference.TotalHours;
+
+                if (totalHours >= 24)
+                {
+                    UpdatePrivateIPDatabase();
+                }
+
+            }
+
             TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
             DateTime LastCheck = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(LastAccess)).UtcDateTime;
             DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(LastCheck, localTimeZone);
 
             Console.WriteLine("Getting logs from {0}", localTime.ToString());
 
-            if (args.Contains("-back7days"))
+            if (args.Contains("-back7days", StringComparer.OrdinalIgnoreCase))
             {
                 DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(unixTimestamp).UtcDateTime;
                 DateTime oneDayEarlier = dateTime.AddDays(-7);
                 LastAccess = new DateTimeOffset(oneDayEarlier).ToUnixTimeMilliseconds().ToString();
             }
-
+            if (args.Contains("-back2hours", StringComparer.OrdinalIgnoreCase))
+            {
+                DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(unixTimestamp).UtcDateTime;
+                DateTime oneDayEarlier = dateTime.AddHours(-2);
+                LastAccess = new DateTimeOffset(oneDayEarlier).ToUnixTimeMilliseconds().ToString();
+            }
 
             do
             {
@@ -87,18 +111,15 @@ namespace Duo_Log_Analyzer
                 {
                     List<string> IgnoreIPList = Properties.Settings.Default.IgnoreIPList.Split(char.Parse("|")).ToList();
                     List<string> IgnoreUserList = Properties.Settings.Default.IgnoreUsers.Split(char.Parse("|")).ToList();
-                    Console.WriteLine("Processing logon event at: {0}", item.isotimestamp);
-                    if (IgnoreUserList.Contains(item.user.name)) { continue; }
+                    Console.WriteLine("Processing logon event at: {0} for user {1}", item.isotimestamp, item.user.name);
+                    if (IgnoreUserList.Contains(item.user.name, StringComparer.OrdinalIgnoreCase)) { continue; }
 
-                    if (IsPrivateIpAddress(item.access_device.ip))
-                    {
-                        Console.WriteLine("Private IP");
-                    }
-                    
+
                     if (!IgnoreIPList.Contains(item.access_device.ip) && !IsPrivateIpAddress(item.access_device.ip))
                     {
                         IPWhoIS IP = new IPWhoIS();
                         Boolean SecurityEvent = false;
+
                         string IPInfo = GetFormattedIOWHOINFO(item.access_device.ip, ref SecurityEvent, ref IP);
 
                         string DuoEvent = string.Format("Application: {3}\nReason: {0}\nAuth Result: {1}\nFactor: {2}\nAuth Device: {4} ",
@@ -107,18 +128,61 @@ namespace Duo_Log_Analyzer
                         {
                             if (IP.security.anonymous || IP.security.hosting || IP.security.proxy || IP.security.tor || IP.security.vpn)
                             {
+                                if (Properties.Settings.Default.iCloudPrivateRelayEnabled)
+                                {
+                                    string iCloudRegion = "";
+                                    string iCloudLanguage = "";
+                                    string iCloudCountryCode = "";
+
+                                    if (IsIPiCloudPrivateIP(item.access_device.ip, ref iCloudCountryCode, ref iCloudLanguage, ref iCloudRegion))
+                                    {
+                                        if (!Settings.Default.iCloudPrivateRelayIgnore)
+                                        {
+                                            string iCloudPrivateRelayInfo = string.Format("Country Code: {0}\nRegion: {1}\nLanguage: {2} ",
+                                                iCloudCountryCode, iCloudRegion, iCloudLanguage);
+                                            SendSNSMessage(String.Format("Warning: User {0} logged in from an iCloud Private Relay.\n\n{1}\n\nDuo Info:\n{2} \n\nIcloud Private Relay Info:\n{3}", item.user.name, IPInfo, DuoEvent, iCloudPrivateRelayInfo));
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                }
                                 SendSNSMessage(String.Format("Alert: User {0} logged in from a suspicious location.\n\n{1}\n\nDuo Info:\n{2}", item.user.name, IPInfo, DuoEvent));
                                 continue;
                             }
                         }
-                        
 
-                        if (IP.country_code != "US" && Properties.Settings.Default.OutsideUS)
+                        string CountryCode = Settings.Default.OutsideCountryCode;
+                        string CountryName = CountryCode;
+                        try
                         {
-                            SendSNSMessage(String.Format("Alert: User {0} logged in from outside the US.\n\n{1}\n\nDuo Info:\n{2}", item.user.name, IPInfo, DuoEvent));
+                            RegionInfo region = new RegionInfo(CountryCode);
+                            CountryName = region.DisplayName;
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.Write("Invalid Country Code specified in config file!");
+                        }
+
+
+                        if (IP.country_code != CountryCode && Properties.Settings.Default.OutsideCountryEnabled)
+                        {
+                            SendSNSMessage(String.Format("Alert: User {0} logged in from outside {3}.\n\n{1}\n\nDuo Info:\n{2}", item.user.name, IPInfo, DuoEvent, CountryName));
                             continue;
                         }
 
+                        if (Properties.Settings.Default.GeoAlertsEnabled)
+                        {
+                        double distance =  GetDistanceBetweenCoordinatesInMiles(IP.latitude, IP.longitude, Properties.Settings.Default.GeoAlertsLat, Settings.Default.GeoAlertsLong);
+                        if (distance > ((double)Settings.Default.GeoAlertsDistance))
+                            {
+                                SendSNSMessage(String.Format("Alert: User {0} logged in from {3} miles away. \n\n{1}\n\nDuo Info:\n{2}", 
+                                    item.user.name, IPInfo, DuoEvent, ((int)distance)));
+
+                            }
+                        }
                     }
 
                     if (item.reason == "user_marked_fraud")
@@ -142,12 +206,12 @@ namespace Duo_Log_Analyzer
                         }
                         if (item.reason == "allow_unenrolled_user" && !RegexIgnore)
                         {
-                            SendSNSMessage(String.Format("Notice: User {0} appears to be a staff member that is currently unenrolled in DUO. They logged in from IP: {1}", item.user.name, item.access_device.ip));
+                            SendSNSMessage(String.Format("Notice: User {0} is currently unenrolled in DUO. They logged in from IP: {1}", item.user.name, item.access_device.ip));
                             continue;
                         }
 
                     }
-                   
+
 
                     if (item.reason == "bypass_user" && Properties.Settings.Default.UserInBypassMode)
                     {
@@ -196,7 +260,7 @@ namespace Duo_Log_Analyzer
             catch (Exception)
             {
                 throw;
-                
+
             }
         }
         private static IPWhoIS IPIOLookup(string IPaddr)
@@ -233,6 +297,91 @@ namespace Duo_Log_Analyzer
             }
 
         }
+        public static bool IsIPInCDIRRange(string IP, string CDIRRange)
+        {
+            try
+            {
+                IPAddress ipAddress = IPAddress.Parse(IP);
+                IPNetwork ipNetwork = IPNetwork.Parse(CDIRRange);
+                return ipNetwork.Contains(ipAddress);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("IsIPInCDIRRange ERROR: {0} ", ex.Message);
+                return false;
+            }
+        }
+
+        public class CsvRow
+        {
+            public string Column1 { get; set; }
+            public string Column2 { get; set; }
+            public string Column3 { get; set; }
+            public string Column4 { get; set; }
+
+        }
+
+        public static bool IsIPiCloudPrivateIP(string Ipaddress, ref string CountryCode, ref string Language, ref string Region)
+        {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ",", HasHeaderRecord = false };
+
+            using (var reader = new StreamReader("egress-ip-ranges.csv"))
+            using (var csv = new CsvReader(reader, config))
+
+            {
+
+                var records = csv.GetRecords<dynamic>();
+
+                foreach (var record in records)
+                {
+                    if (IsIPInCDIRRange(Ipaddress, record.Field1))
+                    {
+                        CountryCode = record.Field2;
+                        Language = record.Field3;
+                        Region = record.Field4;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        public static void UpdatePrivateIPDatabase()
+        {
+            using (var client = new WebClient())
+            {
+                string url = "https://mask-api.icloud.com/egress-ip-ranges.csv"; // replace with the URL of the file you want to download
+                string filePath = "egress-ip-ranges.csv"; // replace with the path where you want to save the file
+
+                try
+                {
+                    client.DownloadFile(url, filePath);
+                    Console.WriteLine("Updated iCloudPrivate Relay DB Successfully.");
+                    Properties.Settings.Default.ICloudPrivateRelayLastUpdate = DateTime.Now;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error downloading file: " + ex.Message);
+                }
+            }
+        }
+        public static double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
+        {
+            const double R = 3958.8; // Earth's radius in miles
+            double latRad1 = lat1 * Math.PI / 180.0;
+            double lonRad1 = lon1 * Math.PI / 180.0;
+            double latRad2 = lat2 * Math.PI / 180.0;
+            double lonRad2 = lon2 * Math.PI / 180.0;
+            double dLat = latRad2 - latRad1;
+            double dLon = lonRad2 - lonRad1;
+            double a = Math.Sin(dLat / 2.0) * Math.Sin(dLat / 2.0) +
+                       Math.Cos(latRad1) * Math.Cos(latRad2) *
+                       Math.Sin(dLon / 2.0) * Math.Sin(dLon / 2.0);
+            double c = 2.0 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            double distance = R * c;
+            return distance;
+        }
+
 
         public static string SendSNSMessage(string Message)
         {
@@ -261,6 +410,22 @@ namespace Duo_Log_Analyzer
             }
         }
 
+        public static double GetDistanceBetweenCoordinatesInMiles(double lat1, double lon1, double lat2, double lon2)
+        {
+            double lat1Rad = lat1 * Math.PI / 180;
+            double lon1Rad = lon1 * Math.PI / 180;
+            double lat2Rad = lat2 * Math.PI / 180;
+            double lon2Rad = lon2 * Math.PI / 180;
+
+
+            double dLat = lat2Rad - lat1Rad;
+            double dLon = lon2Rad - lon1Rad;
+            double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Cos(lat1Rad) * Math.Cos(lat2Rad) * Math.Pow(Math.Sin(dLon / 2), 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            double d = 3959 * c;
+
+            return d;
+        }
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
