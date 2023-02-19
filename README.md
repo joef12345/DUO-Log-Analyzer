@@ -6,14 +6,20 @@ The Duo Log Analyzer pulls sign-in event logs via the DUO API and scans all the 
 - VPNs 
 - Tor 
 - Hosted servers such as AWS EC2 
-- Logins outside the US
+- Logins outside home country.
+- Distance from home site and remote logon
 
 # Additional useful features include:
 
 - Alerts when an unenrolled users signs in.
 - Alerts when a user signs in that is in bypass mode with option to filter users via Regex and list.
 - Ability to filter IP addresses.
+- iCloud Private Relay detection notification and ignore options.
 
+# iCloud Private Relay
+New features will pull the iCloud Private Relay egress list from Apple and gives the option via the GUI to either tag the logon event as a Private Relay logon or ignore the logon event all together. Apple claims that Private Relay Users are all verified and must have an iCloud account account to access the services plus it only works on apple browsers so abuse in not likely (Ie, script running). We recommand that you ignore logon events from Private Relay since this is most likely a valid user or have the logon event tagged for informational use.
+
+The way the new feature works is we pull the ip egress list from Apples servers once in a 24 hour period from the following address: https://mask-api.icloud.com/egress-ip-ranges.csv. It's a large CSV files will several CDIR ip ranges. Because it's not just a simple lookup, we need to compare each IP address against the CDIR range which takes approximately 5 seconds per lookup. I will be optimizing this in the future but for now, it seems to work well. I reached out to Ipwhois.io and based on their response, I do not think they plan on adding support for iCloud Private Relay anytime soon so will will keep doing in manually until support is added. 
 
 # Notifications
 
@@ -44,7 +50,7 @@ An AWS account and SNS is required.
 ```
 
 8. Enter the keys in the GUI and click the test button to confirm connectivity. Follow the directions [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey "here").
-8. Add any Ip addresses you would like to ignore and add them to the list. Please leave 0.0.0.0 in, as applications that do not have an IP address will report with 0.0.0.0 like RDP. It's a good idea to add your organization's public IP to the ignore list, as it will prevent using IPWHOIS credits on known addresses. 
+8. Add any Ip addresses you would like to ignore and add them to the list. It's a good idea to add your organization's public IP to the ignore list, as it will prevent using IPWHOIS credits on known addresses. 
 9. Add any users to be ignored to the list to prevent unenrolled alerts. I have found that LDAP login accounts sometimes get sent to DUO, causing several unenrolled notifications. 
 10. You can create a regex filter to prevent unenrolled alerts from getting sent. For example, students normally do not have DUO enrolled in a school setting, which will cause several alerts. To prevent this, create a regex filter for example, if all your student accounts are numeric, use the following filter `[0-9]`. When creating a filter use the test button to confirm your regex expression.
 11. Create a windows task to run the program every 5 minutes. More often than 5 minutes will cause DUO API rate limiting. Have the task execute `duo log analyzer.exe -run` Make sure the scheduled task runs as the same user that configured the GUI since the application settings are stored per user. 
