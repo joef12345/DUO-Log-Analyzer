@@ -33,7 +33,7 @@ namespace Duo_Log_Analyzer
 
 
 
-            Console.WriteLine("Duo Log Analyzer {0} https://github.com/joef12345/DUO-Log-Analyzer 1.0.0.2");
+            Console.WriteLine("Duo Log Analyzer {0} https://github.com/joef12345/DUO-Log-Analyzer", "1.0.0.3");
             if (!args.Contains("-run", StringComparer.OrdinalIgnoreCase))
             {
                 Console.WriteLine("\nUsage: \n-setup Displays the setup GUI.\n-run Scans DUO Logs and sends alerts. (-back7days Request logs from the last 7 days for testing purposes.)\n");
