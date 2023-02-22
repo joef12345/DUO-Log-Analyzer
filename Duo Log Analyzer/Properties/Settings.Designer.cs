@@ -309,5 +309,89 @@ namespace Duo_Log_Analyzer.Properties {
                 this["OutsideCountryCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UnenrolledARN {
+            get {
+                return ((string)(this["UnenrolledARN"]));
+            }
+            set {
+                this["UnenrolledARN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UnenrolledAlertsOnlySendToUnenrolledARN {
+            get {
+                return ((bool)(this["UnenrolledAlertsOnlySendToUnenrolledARN"]));
+            }
+            set {
+                this["UnenrolledAlertsOnlySendToUnenrolledARN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AppVersion {
+            get {
+                return ((string)(this["AppVersion"]));
+            }
+            set {
+                this["AppVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProgramErrorSNSTopic {
+            get {
+                return ((string)(this["ProgramErrorSNSTopic"]));
+            }
+            set {
+                this["ProgramErrorSNSTopic"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GeolocationioAPIKey {
+            get {
+                return ((string)(this["GeolocationioAPIKey"]));
+            }
+            set {
+                this["GeolocationioAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GeoLocationIoCheck {
+            get {
+                return ((bool)(this["GeoLocationIoCheck"]));
+            }
+            set {
+                this["GeoLocationIoCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GeoLocationIoCheckOverrideAlert {
+            get {
+                return ((bool)(this["GeoLocationIoCheckOverrideAlert"]));
+            }
+            set {
+                this["GeoLocationIoCheckOverrideAlert"] = value;
+            }
+        }
     }
 }

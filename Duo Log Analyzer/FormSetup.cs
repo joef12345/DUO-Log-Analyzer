@@ -27,6 +27,7 @@ namespace Duo_Log_Analyzer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBoxGeoLocationIoAPIKey.Text = Properties.Settings.Default.GeolocationioAPIKey;
             textBoxDuoHostName.Text = Properties.Settings.Default.DuoHost;
             textBoxDuoiKey.Text = Properties.Settings.Default.DUOIKey;
             textBoxDuoSKey.Text = Properties.Settings.Default.DuoSKey;
@@ -79,6 +80,19 @@ namespace Duo_Log_Analyzer
             {
                 checkBoxGeoAlerts.Checked = false;
             }
+            checkBoxOnlySendUnenrolledEnabled.Checked = Properties.Settings.Default.UnenrolledAlertsOnlySendToUnenrolledARN;
+            textBoxSNSTopicUnenrolledUser.Text = Properties.Settings.Default.UnenrolledARN;
+            checkBoxCheckIPGeolocationIo.Checked = Properties.Settings.Default.GeoLocationIoCheck;
+
+            if (Properties.Settings.Default.GeoLocationIoCheckOverrideAlert)
+            {
+                radioButtonIPDoNotGenerateAlert.Checked = true;
+            }
+            else
+            {
+                radioButtonIPGeolocationIoGenerateAlert.Checked = true;
+            }
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -88,8 +102,14 @@ namespace Duo_Log_Analyzer
         public void SaveSettings()
 
         {
+            Properties.Settings.Default.GeoLocationIoCheck = checkBoxCheckIPGeolocationIo.Checked;
+            Properties.Settings.Default.GeoLocationIoCheckOverrideAlert = radioButtonIPDoNotGenerateAlert.Checked;
+
+            Properties.Settings.Default.UnenrolledAlertsOnlySendToUnenrolledARN = checkBoxOnlySendUnenrolledEnabled.Checked;
+            Properties.Settings.Default.UnenrolledARN = textBoxSNSTopicUnenrolledUser.Text;
             if (checkBoxGeoAlerts.Checked)
             {
+                Properties.Settings.Default.GeolocationioAPIKey = textBoxGeoLocationIoAPIKey.Text;
                 Properties.Settings.Default.GeoAlertsEnabled = true;
 
                 Properties.Settings.Default.GeoAlertsDistance = numericUpDownDistance.Value;
@@ -283,7 +303,7 @@ namespace Duo_Log_Analyzer
 
             try
             {
-                string MessageID = Program.SendSNSMessage("Duo Alert - Test Message");
+                string MessageID = AWS.SendSNSMessage("Duo Alert - Test Message");
                 MessageBox.Show(string.Format("Test message sent successfully with ID: \n{0}", MessageID), "Message Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -300,8 +320,8 @@ namespace Duo_Log_Analyzer
             {
                 SaveSettings();
                 bool SecurityEvent = false;
-                IPWhoIS IP = new IPWhoIS();
-                String IPINFO = Program.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
+                IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
+                String IPINFO = IpWhoisIo.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
                 MessageBox.Show(string.Format("Got the following return info from ipwhois.io: \n{0}", IPINFO), "IPWHOIS.IO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -334,8 +354,8 @@ namespace Duo_Log_Analyzer
             {
                 SaveSettings();
                 bool SecurityEvent = false;
-                IPWhoIS IP = new IPWhoIS();
-                String IPINFO = Program.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
+                IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
+                String IPINFO = IpWhoisIo.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
                 textBoxLatitude.Text = IP.latitude.ToString();
                 textBoxLongitude.Text = IP.longitude.ToString();
             }
@@ -358,8 +378,8 @@ namespace Duo_Log_Analyzer
             {
                 SaveSettings();
                 bool SecurityEvent = false;
-                IPWhoIS IP = new IPWhoIS();
-                String IPINFO = Program.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
+                IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
+                String IPINFO = IpWhoisIo.GetFormattedIOWHOINFO("", ref SecurityEvent, ref IP);
                 textBoxCountryCode.Text = IP.country_code;
             }
             catch (Exception ex)
@@ -406,6 +426,56 @@ namespace Duo_Log_Analyzer
         private void label18_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+
+            try
+            {
+                string MessageID = AWS.SendSNSMessage("Duo Alert - Test Message for unenrolled user.", textBoxSNSTopicUnenrolledUser.Text);
+                MessageBox.Show(string.Format("Test message sent successfully with ID: \n{0}", MessageID), "Message Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(string.Format("Error sending SNS Message: {0}", ex.Message));
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+            try
+            {
+                Ipgeolocationio.IPGeolocationInfo IPInfo = null;
+                string IP = Ipgeolocationio.GetFormatedIPGeolocationInformation("", ref IPInfo);
+                MessageBox.Show("Got the following response:\n\n" + IP, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error: " + ex.Message, "Ipgeolocation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                SaveSettings();
+                Ipgeolocationio.IPGeolocationInfo IP = Ipgeolocationio.IPGeolocationLookup("");
+                textBoxLatitude.Text = IP.latitude.ToString();
+                textBoxLongitude.Text = IP.longitude.ToString();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "IPGeolocation.IO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
