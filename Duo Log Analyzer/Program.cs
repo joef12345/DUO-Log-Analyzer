@@ -48,7 +48,7 @@ namespace Duo_Log_Analyzer
                 Console.WriteLine(
                     "\nUsage: \n" +
                     "-setup     Displays the setup GUI.\n" +
-                    "-run       Scans DUO Logs and sends alerts. (-back [Hours] Request logs from previous time for testing purposes.)\n");
+                    "-run       Scans DUO Logs and sends alerts. (-back [Hours] Request logs from X hours ago for testing.)\n");
                 return;
             }
 
