@@ -39,10 +39,16 @@ namespace Duo_Log_Analyzer
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.checkBoxHideIPWHOISKey = new System.Windows.Forms.CheckBox();
-            this.textBoxIPWhoIsAPIKey = new System.Windows.Forms.TextBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBoxIPWhoIsAPIKey = new System.Windows.Forms.TextBox();
+            this.checkBoxHideIPWHOISKey = new System.Windows.Forms.CheckBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxGeoLocationIoAPIKey = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -66,8 +72,14 @@ namespace Duo_Log_Analyzer
             this.checkBoxCountryEnabled = new System.Windows.Forms.CheckBox();
             this.checkBoxUserInBypass = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonIPGeolocationIoGenerateAlert = new System.Windows.Forms.RadioButton();
+            this.radioButtonIPDoNotGenerateAlert = new System.Windows.Forms.RadioButton();
+            this.label22 = new System.Windows.Forms.Label();
+            this.checkBoxCheckIPGeolocationIo = new System.Windows.Forms.CheckBox();
             this.checkBoxGeoAlerts = new System.Windows.Forms.CheckBox();
             this.panelGeoAlerts = new System.Windows.Forms.Panel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label18 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label15 = new System.Windows.Forms.Label();
@@ -112,20 +124,11 @@ namespace Duo_Log_Analyzer
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerClearStatus = new System.Windows.Forms.Timer(this.components);
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.textBoxGeoLocationIoAPIKey = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.checkBoxCheckIPGeolocationIo = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.radioButtonIPDoNotGenerateAlert = new System.Windows.Forms.RadioButton();
-            this.radioButtonIPGeolocationIoGenerateAlert = new System.Windows.Forms.RadioButton();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -133,6 +136,7 @@ namespace Duo_Log_Analyzer
             this.tabPage2.SuspendLayout();
             this.panelOutsideCountry.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelGeoAlerts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDistance)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -141,10 +145,6 @@ namespace Duo_Log_Analyzer
             this.tabPage4.SuspendLayout();
             this.panelPrivateRelay.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -234,6 +234,39 @@ namespace Duo_Log_Analyzer
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "GEO Location Service";
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Location = new System.Drawing.Point(10, 19);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(384, 94);
+            this.tabControl2.TabIndex = 4;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.label4);
+            this.tabPage5.Controls.Add(this.button7);
+            this.tabPage5.Controls.Add(this.textBoxIPWhoIsAPIKey);
+            this.tabPage5.Controls.Add(this.checkBoxHideIPWHOISKey);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(376, 68);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "IPWhoIs.io";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "API Key";
+            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(112, 42);
@@ -243,6 +276,14 @@ namespace Duo_Log_Analyzer
             this.button7.Text = "Test";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // textBoxIPWhoIsAPIKey
+            // 
+            this.textBoxIPWhoIsAPIKey.Location = new System.Drawing.Point(112, 11);
+            this.textBoxIPWhoIsAPIKey.Name = "textBoxIPWhoIsAPIKey";
+            this.textBoxIPWhoIsAPIKey.Size = new System.Drawing.Size(232, 20);
+            this.textBoxIPWhoIsAPIKey.TabIndex = 1;
+            this.textBoxIPWhoIsAPIKey.UseSystemPasswordChar = true;
             // 
             // checkBoxHideIPWHOISKey
             // 
@@ -256,22 +297,44 @@ namespace Duo_Log_Analyzer
             this.checkBoxHideIPWHOISKey.UseVisualStyleBackColor = true;
             this.checkBoxHideIPWHOISKey.CheckedChanged += new System.EventHandler(this.checkBoxHideIPWHOISKey_CheckedChanged);
             // 
-            // textBoxIPWhoIsAPIKey
+            // tabPage6
             // 
-            this.textBoxIPWhoIsAPIKey.Location = new System.Drawing.Point(112, 11);
-            this.textBoxIPWhoIsAPIKey.Name = "textBoxIPWhoIsAPIKey";
-            this.textBoxIPWhoIsAPIKey.Size = new System.Drawing.Size(232, 20);
-            this.textBoxIPWhoIsAPIKey.TabIndex = 1;
-            this.textBoxIPWhoIsAPIKey.UseSystemPasswordChar = true;
+            this.tabPage6.Controls.Add(this.button9);
+            this.tabPage6.Controls.Add(this.label21);
+            this.tabPage6.Controls.Add(this.textBoxGeoLocationIoAPIKey);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(376, 68);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "IPGeolocation.io";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // button9
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "API Key";
+            this.button9.Location = new System.Drawing.Point(113, 42);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 2;
+            this.button9.Text = "Test";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 23);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(45, 13);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "API Key";
+            // 
+            // textBoxGeoLocationIoAPIKey
+            // 
+            this.textBoxGeoLocationIoAPIKey.Location = new System.Drawing.Point(113, 17);
+            this.textBoxGeoLocationIoAPIKey.Name = "textBoxGeoLocationIoAPIKey";
+            this.textBoxGeoLocationIoAPIKey.Size = new System.Drawing.Size(251, 20);
+            this.textBoxGeoLocationIoAPIKey.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -317,6 +380,7 @@ namespace Duo_Log_Analyzer
             this.textBoxSNSTopic.Name = "textBoxSNSTopic";
             this.textBoxSNSTopic.Size = new System.Drawing.Size(193, 20);
             this.textBoxSNSTopic.TabIndex = 2;
+            this.textBoxSNSTopic.TextChanged += new System.EventHandler(this.textBoxSNSTopic_TextChanged);
             // 
             // button6
             // 
@@ -514,6 +578,57 @@ namespace Duo_Log_Analyzer
             this.tabPage3.Text = "Geo Fence";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonIPGeolocationIoGenerateAlert);
+            this.panel1.Controls.Add(this.radioButtonIPDoNotGenerateAlert);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Location = new System.Drawing.Point(10, 209);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(333, 90);
+            this.panel1.TabIndex = 3;
+            // 
+            // radioButtonIPGeolocationIoGenerateAlert
+            // 
+            this.radioButtonIPGeolocationIoGenerateAlert.AutoSize = true;
+            this.radioButtonIPGeolocationIoGenerateAlert.Location = new System.Drawing.Point(13, 55);
+            this.radioButtonIPGeolocationIoGenerateAlert.Name = "radioButtonIPGeolocationIoGenerateAlert";
+            this.radioButtonIPGeolocationIoGenerateAlert.Size = new System.Drawing.Size(306, 17);
+            this.radioButtonIPGeolocationIoGenerateAlert.TabIndex = 2;
+            this.radioButtonIPGeolocationIoGenerateAlert.TabStop = true;
+            this.radioButtonIPGeolocationIoGenerateAlert.Text = "Generate an alert and include data from both data providers";
+            this.radioButtonIPGeolocationIoGenerateAlert.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonIPDoNotGenerateAlert
+            // 
+            this.radioButtonIPDoNotGenerateAlert.AutoSize = true;
+            this.radioButtonIPDoNotGenerateAlert.Location = new System.Drawing.Point(13, 31);
+            this.radioButtonIPDoNotGenerateAlert.Name = "radioButtonIPDoNotGenerateAlert";
+            this.radioButtonIPDoNotGenerateAlert.Size = new System.Drawing.Size(140, 17);
+            this.radioButtonIPDoNotGenerateAlert.TabIndex = 1;
+            this.radioButtonIPDoNotGenerateAlert.TabStop = true;
+            this.radioButtonIPDoNotGenerateAlert.Text = "Do not generate an alert";
+            this.radioButtonIPDoNotGenerateAlert.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(10, 14);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(305, 13);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "If the distance repoted by IPGeolocation.io is within geofence...";
+            // 
+            // checkBoxCheckIPGeolocationIo
+            // 
+            this.checkBoxCheckIPGeolocationIo.AutoSize = true;
+            this.checkBoxCheckIPGeolocationIo.Location = new System.Drawing.Point(10, 186);
+            this.checkBoxCheckIPGeolocationIo.Name = "checkBoxCheckIPGeolocationIo";
+            this.checkBoxCheckIPGeolocationIo.Size = new System.Drawing.Size(294, 17);
+            this.checkBoxCheckIPGeolocationIo.TabIndex = 2;
+            this.checkBoxCheckIPGeolocationIo.Text = "If IPWhoIs.io triggers a geo alert, check IPGeolocation.io";
+            this.checkBoxCheckIPGeolocationIo.UseVisualStyleBackColor = true;
+            // 
             // checkBoxGeoAlerts
             // 
             this.checkBoxGeoAlerts.AutoSize = true;
@@ -542,6 +657,17 @@ namespace Duo_Log_Analyzer
             this.panelGeoAlerts.Name = "panelGeoAlerts";
             this.panelGeoAlerts.Size = new System.Drawing.Size(342, 149);
             this.panelGeoAlerts.TabIndex = 0;
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(78, 125);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(167, 13);
+            this.linkLabel3.TabIndex = 9;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "Use Geolocation Current Location";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // label18
             // 
@@ -967,131 +1093,6 @@ namespace Duo_Log_Analyzer
             this.timerClearStatus.Interval = 3000;
             this.timerClearStatus.Tick += new System.EventHandler(this.timerClearStatus_Tick);
             // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Location = new System.Drawing.Point(10, 19);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(384, 94);
-            this.tabControl2.TabIndex = 4;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.label4);
-            this.tabPage5.Controls.Add(this.button7);
-            this.tabPage5.Controls.Add(this.textBoxIPWhoIsAPIKey);
-            this.tabPage5.Controls.Add(this.checkBoxHideIPWHOISKey);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(376, 68);
-            this.tabPage5.TabIndex = 0;
-            this.tabPage5.Text = "IPWhoIs.io";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.button9);
-            this.tabPage6.Controls.Add(this.label21);
-            this.tabPage6.Controls.Add(this.textBoxGeoLocationIoAPIKey);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(376, 68);
-            this.tabPage6.TabIndex = 1;
-            this.tabPage6.Text = "IPGeolocation.io";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // textBoxGeoLocationIoAPIKey
-            // 
-            this.textBoxGeoLocationIoAPIKey.Location = new System.Drawing.Point(113, 17);
-            this.textBoxGeoLocationIoAPIKey.Name = "textBoxGeoLocationIoAPIKey";
-            this.textBoxGeoLocationIoAPIKey.Size = new System.Drawing.Size(251, 20);
-            this.textBoxGeoLocationIoAPIKey.TabIndex = 0;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 23);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(45, 13);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "API Key";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(113, 42);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 2;
-            this.button9.Text = "Test";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // checkBoxCheckIPGeolocationIo
-            // 
-            this.checkBoxCheckIPGeolocationIo.AutoSize = true;
-            this.checkBoxCheckIPGeolocationIo.Location = new System.Drawing.Point(10, 186);
-            this.checkBoxCheckIPGeolocationIo.Name = "checkBoxCheckIPGeolocationIo";
-            this.checkBoxCheckIPGeolocationIo.Size = new System.Drawing.Size(294, 17);
-            this.checkBoxCheckIPGeolocationIo.TabIndex = 2;
-            this.checkBoxCheckIPGeolocationIo.Text = "If IPWhoIs.io triggers a geo alert, check IPGeolocation.io";
-            this.checkBoxCheckIPGeolocationIo.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButtonIPGeolocationIoGenerateAlert);
-            this.panel1.Controls.Add(this.radioButtonIPDoNotGenerateAlert);
-            this.panel1.Controls.Add(this.label22);
-            this.panel1.Location = new System.Drawing.Point(10, 209);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(333, 90);
-            this.panel1.TabIndex = 3;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 14);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(305, 13);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "If the distance repoted by IPGeolocation.io is within geofence...";
-            // 
-            // radioButtonIPDoNotGenerateAlert
-            // 
-            this.radioButtonIPDoNotGenerateAlert.AutoSize = true;
-            this.radioButtonIPDoNotGenerateAlert.Location = new System.Drawing.Point(13, 31);
-            this.radioButtonIPDoNotGenerateAlert.Name = "radioButtonIPDoNotGenerateAlert";
-            this.radioButtonIPDoNotGenerateAlert.Size = new System.Drawing.Size(140, 17);
-            this.radioButtonIPDoNotGenerateAlert.TabIndex = 1;
-            this.radioButtonIPDoNotGenerateAlert.TabStop = true;
-            this.radioButtonIPDoNotGenerateAlert.Text = "Do not generate an alert";
-            this.radioButtonIPDoNotGenerateAlert.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonIPGeolocationIoGenerateAlert
-            // 
-            this.radioButtonIPGeolocationIoGenerateAlert.AutoSize = true;
-            this.radioButtonIPGeolocationIoGenerateAlert.Location = new System.Drawing.Point(13, 55);
-            this.radioButtonIPGeolocationIoGenerateAlert.Name = "radioButtonIPGeolocationIoGenerateAlert";
-            this.radioButtonIPGeolocationIoGenerateAlert.Size = new System.Drawing.Size(306, 17);
-            this.radioButtonIPGeolocationIoGenerateAlert.TabIndex = 2;
-            this.radioButtonIPGeolocationIoGenerateAlert.TabStop = true;
-            this.radioButtonIPGeolocationIoGenerateAlert.Text = "Generate an alert and include data from both data providers";
-            this.radioButtonIPGeolocationIoGenerateAlert.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(78, 125);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(167, 13);
-            this.linkLabel3.TabIndex = 9;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Use Geolocation Current Location";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
-            // 
             // FormSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1113,6 +1114,11 @@ namespace Duo_Log_Analyzer
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1126,6 +1132,8 @@ namespace Duo_Log_Analyzer
             this.panelOutsideCountry.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelGeoAlerts.ResumeLayout(false);
             this.panelGeoAlerts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDistance)).EndInit();
@@ -1141,13 +1149,6 @@ namespace Duo_Log_Analyzer
             this.panelPrivateRelay.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

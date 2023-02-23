@@ -477,5 +477,9 @@ namespace Duo_Log_Analyzer
                 MessageBox.Show(ex.Message, "IPGeolocation.IO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void textBoxSNSTopic_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

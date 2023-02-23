@@ -1,6 +1,7 @@
 ﻿using Amazon.SimpleNotificationService.Model;
 using Amazon.SimpleNotificationService;
 using System;
+using Amazon.SimpleNotificationService.Util;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,9 +42,8 @@ namespace Duo_Log_Analyzer
         }
         public static bool IsArnValid(string arn)
         {
-            string pattern = @"^arn:(aws|aws-cn|aws-us-gov):[a-zA-Z0-9_-]+:[0-9]+:[a-zA-Z0-9_-]+(/[\w-]+)*$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(arn);
+            if (arn.StartsWith("arn:aws:sns:", StringComparison.CurrentCultureIgnoreCase)) { return true; }
+            return false;
         }
     }
 }

@@ -140,13 +140,12 @@ namespace Duo_Log_Analyzer
                     Console.WriteLine("Processing logon event at: {0} for user {1}", item.isotimestamp, item.user.name);
                     if (IgnoreUserList.Contains(item.user.name, StringComparer.OrdinalIgnoreCase)) { continue; }
 
-
+                    IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
+                    Boolean SecurityEvent = false;
+                    string IPInfo = null;
                     if (!IgnoreIPList.Contains(item.access_device.ip) && !IsPrivateIpAddress(item.access_device.ip))
                     {
-                        IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
-                        Boolean SecurityEvent = false;
-
-                        string IPInfo = IpWhoisIo.GetFormattedIOWHOINFO(item.access_device.ip, ref SecurityEvent, ref IP);
+                        IPInfo = IpWhoisIo.GetFormattedIOWHOINFO(item.access_device.ip, ref SecurityEvent, ref IP);
 
                         string DuoEvent = string.Format("Application: {3}\nReason: {0}\nAuth Result: {1}\nFactor: {2}\nAuth Device: {4} ",
                             item.reason, item.result, item.factor, item.application.name, item.auth_device.name);
