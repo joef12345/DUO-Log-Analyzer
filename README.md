@@ -1,13 +1,11 @@
 # Duo Log Analyzer
 The Duo Log Analyzer pulls sign-in event logs via the DUO API and scans all the IP addresses using the ipwhois.io API. The following security concerns are recognized:
 
-- Anonymous IPs
-- Proxy Servers
-- VPNs 
-- Tor 
-- Hosted servers such as AWS EC2 
+- Logon from Anonymous IPs, Proxy Servers, VPNs, Tor Nodes and Hosted servers such as AWS EC2.
 - Logins outside home country.
-- Distance from home site and remote logon
+- Distance from home site with dual geolocation providers. ipwhois.io primary and geolocaion.io for secondary. Configurable options include ignore if second geo provider is within range or provides data for both geo providers.
+- User marked the logon as fraud in the mobile app.
+- Failed logon with no corresponding successful logon within a configurable time.
 
 # Additional useful features include:
 
