@@ -54,3 +54,12 @@ An AWS account and SNS is required.
 11. Create a windows task to run the program every 5 minutes. More often than 5 minutes will cause DUO API rate limiting. Have the task execute `duo log analyzer.exe -run` Make sure the scheduled task runs as the same user that configured the GUI since the application settings are stored per user. 
 12. For testing, you can run `duo log analyzer.exe -run -last7days` to pull the logs from the last 7 days. In `-run` mode, the program will pull all the logs since the last time the program was executed.
 13. If you have any problems or suggestions, please visit the discussions page here: https://github.com/joef12345/Duo-Log-Analyzer/discussions or report problems here: https://github.com/joef12345/Duo-Log-Analyzer/issues
+
+
+## Upgrading From Previous Release
+- Simply extract the zip file in the same directory as your previous installation and overwrite all files.  Your configuration will be automatically upgraded to the new version. 
+- Run the program in `-setup` mode to make take advantage of any new features.
+
+## Checking Than One DUO Instance
+- Create a folder for each instance and run the program in `-setup` mode to create a different configuration for each DUO instance. 
+- Configure task scheduler to run both executables in `-run` mode. 
