@@ -64,6 +64,10 @@ namespace Duo_Log_Analyzer
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numericUpDownFailedLoginTime = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.checkBoxFailedLogonEnabled = new System.Windows.Forms.CheckBox();
             this.panelOutsideCountry = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -124,6 +128,10 @@ namespace Duo_Log_Analyzer
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerClearStatus = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxUserMarkedAsFraudEnabled = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -134,6 +142,7 @@ namespace Duo_Log_Analyzer
             this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFailedLoginTime)).BeginInit();
             this.panelOutsideCountry.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -229,7 +238,7 @@ namespace Duo_Log_Analyzer
             this.groupBox2.Controls.Add(this.tabControl2);
             this.groupBox2.Location = new System.Drawing.Point(12, 157);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(400, 114);
+            this.groupBox2.Size = new System.Drawing.Size(400, 134);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "GEO Location Service";
@@ -269,7 +278,7 @@ namespace Duo_Log_Analyzer
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(112, 42);
+            this.button7.Location = new System.Drawing.Point(112, 37);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(77, 23);
             this.button7.TabIndex = 3;
@@ -347,9 +356,9 @@ namespace Duo_Log_Analyzer
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.textBoxAWSSNSARN);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(13, 277);
+            this.groupBox3.Location = new System.Drawing.Point(13, 297);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(400, 278);
+            this.groupBox3.Size = new System.Drawing.Size(400, 258);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "AWS SNS Settings";
@@ -483,6 +492,14 @@ namespace Duo_Log_Analyzer
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox2);
+            this.tabPage2.Controls.Add(this.label25);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.checkBoxUserMarkedAsFraudEnabled);
+            this.tabPage2.Controls.Add(this.label24);
+            this.tabPage2.Controls.Add(this.numericUpDownFailedLoginTime);
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Controls.Add(this.checkBoxFailedLogonEnabled);
             this.tabPage2.Controls.Add(this.panelOutsideCountry);
             this.tabPage2.Controls.Add(this.checkBoxSuspiciousLocation);
             this.tabPage2.Controls.Add(this.checkBoxCountryEnabled);
@@ -495,13 +512,58 @@ namespace Duo_Log_Analyzer
             this.tabPage2.Text = "Security Alerts";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(264, 215);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(44, 13);
+            this.label24.TabIndex = 20;
+            this.label24.Text = "Minutes";
+            // 
+            // numericUpDownFailedLoginTime
+            // 
+            this.numericUpDownFailedLoginTime.Location = new System.Drawing.Point(192, 212);
+            this.numericUpDownFailedLoginTime.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownFailedLoginTime.Name = "numericUpDownFailedLoginTime";
+            this.numericUpDownFailedLoginTime.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownFailedLoginTime.TabIndex = 19;
+            this.numericUpDownFailedLoginTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(15, 215);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(171, 13);
+            this.label23.TabIndex = 18;
+            this.label23.Text = "No Successful Login in More Than";
+            // 
+            // checkBoxFailedLogonEnabled
+            // 
+            this.checkBoxFailedLogonEnabled.AutoSize = true;
+            this.checkBoxFailedLogonEnabled.Location = new System.Drawing.Point(6, 194);
+            this.checkBoxFailedLogonEnabled.Name = "checkBoxFailedLogonEnabled";
+            this.checkBoxFailedLogonEnabled.Size = new System.Drawing.Size(302, 17);
+            this.checkBoxFailedLogonEnabled.TabIndex = 17;
+            this.checkBoxFailedLogonEnabled.Text = "Failed Logon With No Corresponding Successful Login If...";
+            this.checkBoxFailedLogonEnabled.UseVisualStyleBackColor = true;
+            // 
             // panelOutsideCountry
             // 
             this.panelOutsideCountry.Controls.Add(this.label16);
             this.panelOutsideCountry.Controls.Add(this.linkLabel2);
             this.panelOutsideCountry.Controls.Add(this.textBoxCountryCode);
             this.panelOutsideCountry.Enabled = false;
-            this.panelOutsideCountry.Location = new System.Drawing.Point(25, 78);
+            this.panelOutsideCountry.Location = new System.Drawing.Point(25, 128);
             this.panelOutsideCountry.Name = "panelOutsideCountry";
             this.panelOutsideCountry.Size = new System.Drawing.Size(287, 57);
             this.panelOutsideCountry.TabIndex = 16;
@@ -547,7 +609,7 @@ namespace Duo_Log_Analyzer
             // checkBoxCountryEnabled
             // 
             this.checkBoxCountryEnabled.AutoSize = true;
-            this.checkBoxCountryEnabled.Location = new System.Drawing.Point(6, 55);
+            this.checkBoxCountryEnabled.Location = new System.Drawing.Point(6, 105);
             this.checkBoxCountryEnabled.Name = "checkBoxCountryEnabled";
             this.checkBoxCountryEnabled.Size = new System.Drawing.Size(101, 17);
             this.checkBoxCountryEnabled.TabIndex = 11;
@@ -1093,6 +1155,43 @@ namespace Duo_Log_Analyzer
             this.timerClearStatus.Interval = 3000;
             this.timerClearStatus.Tick += new System.EventHandler(this.timerClearStatus_Tick);
             // 
+            // checkBoxUserMarkedAsFraudEnabled
+            // 
+            this.checkBoxUserMarkedAsFraudEnabled.AutoSize = true;
+            this.checkBoxUserMarkedAsFraudEnabled.Location = new System.Drawing.Point(6, 241);
+            this.checkBoxUserMarkedAsFraudEnabled.Name = "checkBoxUserMarkedAsFraudEnabled";
+            this.checkBoxUserMarkedAsFraudEnabled.Size = new System.Drawing.Size(226, 17);
+            this.checkBoxUserMarkedAsFraudEnabled.TabIndex = 21;
+            this.checkBoxUserMarkedAsFraudEnabled.Text = "User Reported The Logon Event As Fraud";
+            this.checkBoxUserMarkedAsFraudEnabled.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(86, 69);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(256, 20);
+            this.textBox1.TabIndex = 22;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(22, 76);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(62, 13);
+            this.label25.TabIndex = 23;
+            this.label25.Text = "SNS Topic ";
+            this.label25.Click += new System.EventHandler(this.label25_Click);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(21, 50);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(283, 17);
+            this.checkBox2.TabIndex = 24;
+            this.checkBox2.Text = "Only Send Unenrolled Alerts To The SNS Topic Below";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // FormSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1128,6 +1227,7 @@ namespace Duo_Log_Analyzer
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFailedLoginTime)).EndInit();
             this.panelOutsideCountry.ResumeLayout(false);
             this.panelOutsideCountry.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -1250,5 +1350,13 @@ namespace Duo_Log_Analyzer
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.CheckBox checkBoxCheckIPGeolocationIo;
         private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.NumericUpDown numericUpDownFailedLoginTime;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox checkBoxFailedLogonEnabled;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBoxUserMarkedAsFraudEnabled;
     }
 }

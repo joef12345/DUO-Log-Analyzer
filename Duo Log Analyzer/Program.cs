@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Duo_Log_Analyzer.Properties;
 using System.Globalization;
+using static Duo_Log_Analyzer.Program;
 
 namespace Duo_Log_Analyzer
 {
@@ -143,6 +144,17 @@ namespace Duo_Log_Analyzer
                     IpWhoisIo.IPWhoIS IP = new IpWhoisIo.IPWhoIS();
                     Boolean SecurityEvent = false;
                     string IPInfo = null;
+
+                    if (item.result == "denied")
+                    {
+                        FailedLogon.ReportInvalidLogon(item.user.name, string.Format("IP: {0} - Reason: {1} ", item.access_device.ip, item.reason), item.isotimestamp);
+                    }
+
+                    if (item.result == "success")
+                    {
+                        FailedLogon.ReportValidLogonEvent(item.user.name);
+                    }
+
                     if (!IgnoreIPList.Contains(item.access_device.ip) && !IsPrivateIpAddress(item.access_device.ip))
                     {
                         IPInfo = IpWhoisIo.GetFormattedIOWHOINFO(item.access_device.ip, ref SecurityEvent, ref IP);
@@ -235,7 +247,10 @@ namespace Duo_Log_Analyzer
                             }
                         }
                     }
+                    if (item.reason == "denied")
+                    {
 
+                    }
                     if (item.reason == "user_marked_fraud")
                     {
                         AWS.SendSNSMessage(String.Format("Alert: User {0} reported that the logon attempt was fraud. They attempted to login from IP: {1}", item.user.name, item.access_device.ip));
@@ -290,6 +305,27 @@ namespace Duo_Log_Analyzer
                 }
             } while (true);
 
+
+            int EventTimeLimit = 10;
+            List<string> ProcessedUserNames = new List<string>  { };
+            List<FailedLogon.FailedLogonEvent> FailedEvents = FailedLogon.FindOlderThan(EventTimeLimit);
+            foreach (var item in FailedEvents)
+            {
+                if (ProcessedUserNames.Contains(item.UserName))
+                { continue; }
+                string AlertMessage = String.Format
+                    ("Warning: User {0} had the following failed logon events with no corosponding successfull logon within the last {1} minutes:\n\n",
+                    item.UserName, EventTimeLimit.ToString());
+                List<FailedLogon.FailedLogonEvent> FailedEventsByCurrentUser = FailedLogon.GetFailedEventsByUsername(item.UserName);
+                foreach (var FailedEventByUser in FailedEventsByCurrentUser)
+                {
+                    AlertMessage = AlertMessage + FailedEventByUser.Message + "\n";
+                }
+                AWS.SendSNSMessage(AlertMessage);
+                FailedLogon.DeleteRecord(item.UserName);
+                ProcessedUserNames.Add(item.UserName);  
+            }
+
             Properties.Settings.Default.LastLogFetch = unixTimestamp.ToString();
             Properties.Settings.Default.Save();
             return;
@@ -327,7 +363,12 @@ namespace Duo_Log_Analyzer
             return isPrivate1 || isPrivate2 || isPrivate3;
         }
 
+        public class DeniedUserData
+        {
+            public string UserName { get; set; }
+            public DateTime FailedDate { get; set; }
 
+        }
         public class Location
         {
             public string city { get; set; }

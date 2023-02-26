@@ -393,5 +393,41 @@ namespace Duo_Log_Analyzer.Properties {
                 this["GeoLocationIoCheckOverrideAlert"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FailedLogonEventMonitoringEnabled {
+            get {
+                return ((bool)(this["FailedLogonEventMonitoringEnabled"]));
+            }
+            set {
+                this["FailedLogonEventMonitoringEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public decimal FailedLogonEventTime {
+            get {
+                return ((decimal)(this["FailedLogonEventTime"]));
+            }
+            set {
+                this["FailedLogonEventTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UserMarkedFraudEnabled {
+            get {
+                return ((bool)(this["UserMarkedFraudEnabled"]));
+            }
+            set {
+                this["UserMarkedFraudEnabled"] = value;
+            }
+        }
     }
 }

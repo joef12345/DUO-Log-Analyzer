@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AWS.cs" />
+    <Compile Include="FailedLogon.cs" />
     <Compile Include="Ipgeolocationio.cs" />
     <Compile Include="Duo.cs" />
     <Compile Include="FormSetup.cs">

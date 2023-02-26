@@ -27,6 +27,9 @@ namespace Duo_Log_Analyzer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            checkBoxUserMarkedAsFraudEnabled.Checked = Properties.Settings.Default.UserMarkedFraudEnabled;
+            checkBoxFailedLogonEnabled.Checked = Properties.Settings.Default.FailedLogonEventMonitoringEnabled;
+            numericUpDownFailedLoginTime.Value = Properties.Settings.Default.FailedLogonEventTime;
             textBoxGeoLocationIoAPIKey.Text = Properties.Settings.Default.GeolocationioAPIKey;
             textBoxDuoHostName.Text = Properties.Settings.Default.DuoHost;
             textBoxDuoiKey.Text = Properties.Settings.Default.DUOIKey;
@@ -102,6 +105,9 @@ namespace Duo_Log_Analyzer
         public void SaveSettings()
 
         {
+            Properties.Settings.Default.UserMarkedFraudEnabled = checkBoxUserMarkedAsFraudEnabled.Checked;
+            Properties.Settings.Default.FailedLogonEventMonitoringEnabled = checkBoxFailedLogonEnabled.Checked;
+            Properties.Settings.Default.FailedLogonEventTime = numericUpDownFailedLoginTime.Value;
             Properties.Settings.Default.GeoLocationIoCheck = checkBoxCheckIPGeolocationIo.Checked;
             Properties.Settings.Default.GeoLocationIoCheckOverrideAlert = radioButtonIPDoNotGenerateAlert.Checked;
 
@@ -480,6 +486,11 @@ namespace Duo_Log_Analyzer
 
         private void textBoxSNSTopic_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void label25_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

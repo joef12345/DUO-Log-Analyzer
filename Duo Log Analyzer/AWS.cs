@@ -29,6 +29,7 @@ namespace Duo_Log_Analyzer
             {
                 TopicArn = arn,
                 Message = Message
+                
             };
             try
             {
