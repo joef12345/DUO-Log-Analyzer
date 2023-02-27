@@ -27,7 +27,7 @@ An AWS account and SNS is required.
 
 
 # Setup and Deployment
-1. [Download](https://github.com/joef12345/Duo-Log-Analyzer/releases/tag/V1.0.0.0 "Download") the released files and extract to a folder of your choice.
+1. [Download](https://github.com/joef12345/Duo-Log-Analyzer/releases/tag/V.1.0.0.6 "Download") the released files and extract to a folder of your choice.
 2. From a command prompt, execute `duo log analyzer.exe -setup`
 3. The GUI will open.
 4. Follow the directions [here](https://duo.com/docs/adminapi "here") to create the duo api application. The only permission that is required is  `read log files`. Enter the DUO API keys and hostname in the GUI.
