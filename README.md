@@ -52,7 +52,7 @@ An AWS account and SNS is required.
 9. Add any users to be ignored to the list to prevent unenrolled alerts. I have found that LDAP login accounts sometimes get sent to DUO, causing several unenrolled notifications. 
 10. You can create a regex filter to prevent unenrolled alerts from getting sent. For example, students normally do not have DUO enrolled in a school setting, which will cause several alerts. To prevent this, create a regex filter for example, if all your student accounts are numeric, use the following filter `[0-9]`. When creating a filter use the test button to confirm your regex expression.
 11. Create a windows task to run the program every 5 minutes. More often than 5 minutes will cause DUO API rate limiting. Have the task execute `duo log analyzer.exe -run` Make sure the scheduled task runs as the same user that configured the GUI since the application settings are stored per user. 
-12. For testing, you can run `duo log analyzer.exe -run -last7days` to pull the logs from the last 7 days. In `-run` mode, the program will pull all the logs since the last time the program was executed.
+12. For testing, you can run `duo log analyzer.exe -run -back X` where X is the number of hours to pull previously from the current time. In `-run` mode, the program will pull all the logs since the last time the program was executed.
 13. If you have any problems or suggestions, please visit the discussions page here: https://github.com/joef12345/Duo-Log-Analyzer/discussions or report problems here: https://github.com/joef12345/Duo-Log-Analyzer/issues
 
 
