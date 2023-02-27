@@ -58,7 +58,7 @@ An AWS account and SNS is required.
 
 ## Upgrading From Previous Release
 - Simply extract the zip file in the same directory as your previous installation and overwrite all files.  Your configuration will be automatically upgraded to the new version. 
-- Run the program in `-setup` mode to make take advantage of any new features.
+- Run the program in `-setup` mode to take advantage of any new features.
 
 ## Checking Than One DUO Instance
 - Create a folder for each instance and run the program in `-setup` mode to create a different configuration for each DUO instance. 
