@@ -122,6 +122,7 @@ namespace Duo_Log_Analyzer
                 parameters.Add("mintime", (Int64.Parse(LastAccess) + 1).ToString());
                 parameters.Add("maxtime", unixTimestamp.ToString());
                 parameters.Add("limit", "1000");
+                parameters.Add("sort", "ts:asc");
                 if (NextOffset != "")
                 {
                     parameters.Add("next_offset", NextOffset);
@@ -251,10 +252,7 @@ namespace Duo_Log_Analyzer
                             }
                         }
                     }
-                    if (item.reason == "denied")
-                    {
 
-                    }
                     if (item.reason == "user_marked_fraud" && Properties.Settings.Default.UserMarkedFraudEnabled)
                     {
                         AWS.SendSNSMessage(String.Format("Alert: User {0} reported that the logon attempt was fraud. They attempted to login from IP: {1}", item.user.name, item.access_device.ip));
