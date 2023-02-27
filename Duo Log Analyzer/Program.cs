@@ -145,16 +145,20 @@ namespace Duo_Log_Analyzer
                     Boolean SecurityEvent = false;
                     string IPInfo = null;
 
-                    if (item.result == "denied")
+                    if (Properties.Settings.Default.FailedLogonEventMonitoringEnabled)
                     {
-                        FailedLogon.ReportInvalidLogon(item.user.name, string.Format("IP: {0} - Reason: {1} ", item.access_device.ip, item.reason), item.isotimestamp);
-                    }
 
-                    if (item.result == "success")
-                    {
-                        FailedLogon.ReportValidLogonEvent(item.user.name);
-                    }
+                        if (item.result == "denied")
+                        {
+                            FailedLogon.ReportInvalidLogon(item.user.name, string.Format("IP: {0} - Reason: {1} ", item.access_device.ip, item.reason), item.isotimestamp);
+                        }
 
+                        if (item.result == "success")
+                        {
+                            FailedLogon.ReportValidLogonEvent(item.user.name);
+                        }
+
+                    }
                     if (!IgnoreIPList.Contains(item.access_device.ip) && !IsPrivateIpAddress(item.access_device.ip))
                     {
                         IPInfo = IpWhoisIo.GetFormattedIOWHOINFO(item.access_device.ip, ref SecurityEvent, ref IP);
@@ -251,7 +255,7 @@ namespace Duo_Log_Analyzer
                     {
 
                     }
-                    if (item.reason == "user_marked_fraud")
+                    if (item.reason == "user_marked_fraud" && Properties.Settings.Default.UserMarkedFraudEnabled)
                     {
                         AWS.SendSNSMessage(String.Format("Alert: User {0} reported that the logon attempt was fraud. They attempted to login from IP: {1}", item.user.name, item.access_device.ip));
                         continue;
@@ -306,24 +310,27 @@ namespace Duo_Log_Analyzer
             } while (true);
 
 
-            int EventTimeLimit = 10;
-            List<string> ProcessedUserNames = new List<string>  { };
-            List<FailedLogon.FailedLogonEvent> FailedEvents = FailedLogon.FindOlderThan(EventTimeLimit);
-            foreach (var item in FailedEvents)
+            if (Properties.Settings.Default.FailedLogonEventMonitoringEnabled)
             {
-                if (ProcessedUserNames.Contains(item.UserName))
-                { continue; }
-                string AlertMessage = String.Format
-                    ("Warning: User {0} had the following failed logon events with no corosponding successfull logon within the last {1} minutes:\n\n",
-                    item.UserName, EventTimeLimit.ToString());
-                List<FailedLogon.FailedLogonEvent> FailedEventsByCurrentUser = FailedLogon.GetFailedEventsByUsername(item.UserName);
-                foreach (var FailedEventByUser in FailedEventsByCurrentUser)
+                int EventTimeLimit = (int)Properties.Settings.Default.FailedLogonEventTime;
+                List<string> ProcessedUserNames = new List<string> { };
+                List<FailedLogon.FailedLogonEvent> FailedEvents = FailedLogon.FindOlderThan(EventTimeLimit);
+                foreach (var item in FailedEvents)
                 {
-                    AlertMessage = AlertMessage + FailedEventByUser.Message + "\n";
-                }
-                AWS.SendSNSMessage(AlertMessage);
-                FailedLogon.DeleteRecord(item.UserName);
-                ProcessedUserNames.Add(item.UserName);  
+                    if (ProcessedUserNames.Contains(item.UserName))
+                    { continue; }
+                    string AlertMessage = String.Format
+                        ("Warning: User {0} had the following failed logon events with no corosponding successfull logon within the last {1} minutes:\n\n",
+                        item.UserName, EventTimeLimit.ToString());
+                    List<FailedLogon.FailedLogonEvent> FailedEventsByCurrentUser = FailedLogon.GetFailedEventsByUsername(item.UserName);
+                    foreach (var FailedEventByUser in FailedEventsByCurrentUser)
+                    {
+                        AlertMessage = AlertMessage + FailedEventByUser.Message + "\n";
+                    }
+                    AWS.SendSNSMessage(AlertMessage);
+                    FailedLogon.DeleteRecord(item.UserName);
+                    ProcessedUserNames.Add(item.UserName);
+                } 
             }
 
             Properties.Settings.Default.LastLogFetch = unixTimestamp.ToString();
